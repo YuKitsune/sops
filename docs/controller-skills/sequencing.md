@@ -202,7 +202,7 @@ Similarly, when an aircraft appears to be unable to fly a reroute (such as an ou
 ### Usage with MAESTRO
 
 The [MAESTRO](../client/maestro.md) calculated delay can be used to ascertain which CDO waypoint to use.
-It's recommended to use a combination of speed control and re-routing when the required delay exceeds
+It's recommended to use a combination of speed control and re-routing when speed control is insufficient.
 
 Before issuing re-routing instructions, verify the `ETA_FF` is accurate using the BRL, or by asking the pilot for their estimate.
 If the `ETA_FF` in MAESTRO is inaccurate, use the "Change ETA_FF` function to adjust it. MAESTRO will re-position the flight, and re-calculate the required delay if necessary.
