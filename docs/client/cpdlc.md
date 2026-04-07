@@ -88,7 +88,7 @@ The label background changes when a downlink message is awaiting response. The s
   <figcaption>Track label displaying an open CPDLC downlink when the `UNABLE` message is received</figcaption>
 </figure>
 
-Left-clicking the label opens the CPDLC Editor. If the aircraft is not yet logged on, left-clicking sends a `CONNECTION REQUESTED` message.
+Left-clicking the label opens the CPDLC Editor. Pilot-initiated logon requests are accepted automatically, and no controller action is required to establish a connection. If an aircraft shows `.` but has not logged on, left-clicking the label sends a `CONNECTION REQUESTED` message to initiate the connection from the controller side.
 
 #### Voice Capability
 
@@ -142,14 +142,13 @@ Use CPDLC as the primary means of communication with suitably equipped aircraft 
 Always ensure a backup communication medium (VHF or HF frequency) has been provided to the aircraft.
 Do not use CPDLC for urgent or time-critical messages. Use voice for any instruction that requires a prompt response.
 
-Ensure you hold data authority for all CPDLC-connected aircraft under your jurisdiction. If an aircraft shows the `-` symbol, request a CPDLC position report as soon as practicable.
+Ensure you hold data authority for all CPDLC-connected aircraft under your jurisdiction. If an aircraft under your jurisdiction shows the `-` symbol, request a CPDLC position report to promote it to Current Data Authority.
 
 If you receive a `NOT CURRENT DATA AUTHORITY` downlink, request the previous unit to send an `END SERVICE` message to the aircraft. If that is not possible, instruct the pilot to disconnect CPDLC and log on to the relevant centre.
 
 ### Managing Dialogues
 
-Always update the FDR before acknowledging a closed dialogue.
-If a CPDLC exchange is resolved by voice, close the dialogue with an appropriate message.
+Closed dialogues are acknowledged via the Current Messages Window. Always update the FDR before acknowledging a closed dialogue. If a CPDLC exchange is resolved by voice, close the dialogue with an appropriate message so the Current Messages Window stays current.
 
 Use pre-formatted elements where possible. Avoid free-text unless no suitable template exists.
 
@@ -207,13 +206,15 @@ When issuing a weather deviation, include the approved deviation along with a re
 
 ### Transfers
 
-Ensure all open CPDLC dialogues are closed before handing off an aircraft to the next sector.
+#### Within the Same ATSU
 
-If a coordinated CPDLC transfer has been agreed with the receiving sector, send a `MONITOR` uplink specifying the next VHF frequency instead of closing the connection. This keeps the CPDLC link active while transferring voice communications.
+Ensure all open CPDLC dialogues are closed before handing off an aircraft to the next sector. If a coordinated CPDLC transfer has been agreed with the receiving sector, send a `MONITOR` uplink specifying the next VHF frequency instead of closing the connection. This keeps the CPDLC link active while transferring voice communications.
+
+#### To a Different ATSU
 
 If open uplink messages exist when transferring to another ATSU, send `CHECK AND RESPOND TO OPEN CPDLC MESSAGES` and coordinate a delay with the next centre if needed. Send `END SERVICE` manually once all dialogues are closed. If a dialogue cannot be closed, advise the next unit and manually terminate the connection.
 
-Advise aircraft of the delayed transfer using the `EXPECT CPDLC TRANSFER AT [time]` uplink message.
+If the transfer will not complete before the aircraft reaches the FIR boundary, advise the aircraft using `EXPECT CPDLC TRANSFER AT [time]`.
 
 For aircraft entering a non-CPDLC FIR, send `END SERVICE` within 10 minutes after the frequency transfer point.
 
