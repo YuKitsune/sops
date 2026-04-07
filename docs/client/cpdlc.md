@@ -70,13 +70,54 @@ The CPDLC label item shows each aircraft's connection status:
 | `-` | CPDLC connection established, we are the Next Data Authority |
 | `+` | CPDLC connection established, we are the Current Data Authority |
 
+
+<figure markdown>
+![Track label with the Next Data Authority state](./img/cpdlc-nda.png)
+  <figcaption>Track label with the Next Data Authority state</figcaption>
+</figure>
+
 The label background changes when a downlink message is awaiting response. The symbol colour changes when an `UNABLE` response has been received.
 
-<!-- TODO: Screenshot -->
+<figure markdown>
+![Track label displaying an open CPDLC downlink](./img/cpdlc-downlink.png)
+  <figcaption>Track label displaying an open CPDLC downlink</figcaption>
+</figure>
+
+<figure markdown>
+![Track label displaying an open CPDLC `UNABLE` downlink](./img/cpdlc-unable.png)
+  <figcaption>Track label displaying an open CPDLC downlink when the `UNABLE` message is received</figcaption>
+</figure>
 
 Left-clicking the label opens the CPDLC Editor. If the aircraft is not yet logged on, left-clicking sends a `CONNECTION REQUESTED` message.
 
-<!-- TODO: Screenshot -->
+#### Voice Capability
+
+vatSys uses `-` and `+` by default to indicate receive-only and text-only voice capabilities. To avoid confusion with the CPDLC label symbols, the plugin replaces these with a separate label item:
+
+| Symbol | Meaning |
+| :----: | ------- |
+| (blank) | Fully voice capable |
+| `R` | Receive only |
+| `T` | Text only |
+| `V` | Voice capable (only displayed when a text message is received) |
+
+Left or right-clicking the label item opens the text message editor.
+
+<figure markdown>
+![Track label showing a text-only pilot](./img/cpdlc-txt.png)
+  <figcaption>Track label showing a text-only pilot</figcaption>
+</figure>
+
+### Current Messages Window
+
+The Current Messages Window shows all open CPDLC dialogues.
+Messages are colour-coded to indicate their state.
+The window opens automatically when a new downlink is received and closes once all dialogues are resolved.
+
+<figure markdown>
+![Colour coding for CPDLC messages](./img/cpdlc-messages.png)
+  <figcaption>Colour coding for CPDLC messages</figcaption>
+</figure>
 
 ### Automatic Actions
 
@@ -84,7 +125,6 @@ The plugin handles the following automatically:
 
 - **Logon:** Pilot logon requests are automatically accepted.
 - **Next Data Authority:** The plugin calculates the next ATSU from the aircraft's route and automatically transmits a `NEXT DATA AUTHORITY` message 45 minutes before the aircraft enters that airspace.
-- **End Service on Handoff:** When you hand off an aircraft to a controller in a different ATSU, or one without CPDLC, the plugin automatically sends an `END SERVICE` message. <!-- TODO: Verify this before merging -->
 
 ### Limitations
 
@@ -170,8 +210,6 @@ When issuing a weather deviation, include the approved deviation along with a re
 Ensure all open CPDLC dialogues are closed before handing off an aircraft to the next sector.
 
 If a coordinated CPDLC transfer has been agreed with the receiving sector, send a `MONITOR` uplink specifying the next VHF frequency instead of closing the connection. This keeps the CPDLC link active while transferring voice communications.
-
-<!-- TODO: Phraseology example -->
 
 If open uplink messages exist when transferring to another ATSU, send `CHECK AND RESPOND TO OPEN CPDLC MESSAGES` and coordinate a delay with the next centre if needed. Send `END SERVICE` manually once all dialogues are closed. If a dialogue cannot be closed, advise the next unit and manually terminate the connection.
 
