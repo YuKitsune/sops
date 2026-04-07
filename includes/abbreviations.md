@@ -8,6 +8,7 @@
 *[DGA]: DME or GNSS Arrival
 *[ANR]: Air Navigation Register   
 *[ATS]: Air Traffic Services
+*[ATSU]: Air Traffic Service Unit
 *[TMA]: Terminal Manoeuvring Area
 *[FIR]: Flight Information Region
 *[SSR]: Secondary Surveillance Radar
