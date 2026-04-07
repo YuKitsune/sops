@@ -4,7 +4,8 @@ title: CPDLC
 
 --8<-- "includes/abbreviations.md"
 
-Controller-Pilot Data Link Communications (CPDLC) allows controllers and pilots to exchange structured text messages as an alternative to voice. In the real world, CPDLC is used as the primary means of communication with aircraft above `F245`, particularly beyond VHF range.
+Controller-Pilot Data Link Communications (CPDLC) allows controllers and pilots to exchange structured text messages as an alternative to voice. In the real world, CPDLC is the primary means of communication with aircraft above `F245` when beyond VHF range.
+CPDLC is routinely used over oceanic sectors, and may be used over continental sectors. Using CPDLC for short-haul operations should be avoided.
 
 VATSIM does not officially support CPDLC. On VATSIM, [Hoppie's ACARS network](https://www.hoppie.nl/acars/) has become the de-facto standard, supported by most flight simulation addon aircraft and a variety of controller client plugins. Hoppie's network is not affiliated with VATSIM.
 
@@ -138,7 +139,7 @@ The plugin handles the following automatically:
 
 CPDLC must only be used at enroute or oceanic positions. **CPDLC must not be used below `F245`.**
 
-Use CPDLC as the primary means of communication with suitably equipped aircraft beyond VHF range.
+Use CPDLC as the primary means of communication with suitably equipped aircraft beyond VHF range. Avoid using CPDLC for short-haul domestic flights.
 Always ensure a backup communication medium (VHF or HF frequency) has been provided to the aircraft.
 Do not use CPDLC for urgent or time-critical messages. Use voice for any instruction that requires a prompt response.
 
@@ -162,8 +163,8 @@ When issuing a conditional clearance, prepend `MAINTAIN [level]` to the uplink.
 For a clearance with a level-by requirement, use `CLIMB (or DESCEND) TO REACH [level] BY [time/position]`:
 
 ```
-CLIMB TO REACH 370 BY 1400
-CLIMB TO REACH 370 BY APOMA
+CLIMB TO REACH 370 BY 1400.
+CLIMB TO REACH 370 BY APOMA.
 ```
 
 For an intermediate level requirement within a climb or descent, append `REACH [level] BY [time/position]` as a free-text element. Do not send it as a standalone message:
@@ -185,7 +186,8 @@ When a pilot sends multiple requests in a single downlink and all can be approve
 ```
 PILOT: REQUEST CLIMB TO [level]. REQUEST DIRECT TO [position].
 ATC:   UNABLE
-ATC:   PROCEED DIRECT TO [position].  (separate message)
+(separate dialogue)
+ATC:   PROCEED DIRECT TO [position].  
 ```
 
 ### Delays
