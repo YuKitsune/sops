@@ -208,7 +208,7 @@ When issuing a weather deviation, include the approved deviation along with a re
 
 ### Transfers
 
-When transferring an aircraft to the next sector, handoff the tag to the next controller as normal. When the handoff is accepted, transfer the CPDLC connection if necessary (as per below).
+When transferring an aircraft to the next sector, handoff the tag to the next controller as normal. When the handoff is accepted, issue frequency transfer instructions via voice or CPDLC, then transfer the CPDLC connection if necessary (for handoffs to a [different FIR](#to-a-different-fir)).
 
 <figure markdown>
 ![CPDLC transfer behavior along a route](./img/cpdlc-xfr.png)
