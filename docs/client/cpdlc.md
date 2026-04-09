@@ -208,6 +208,8 @@ When issuing a weather deviation, include the approved deviation along with a re
 
 ### Transfers
 
+When transferring an aircraft to the next sector, handoff the tag to the next controller as normal. When the handoff is accepted, transfer the CPDLC connection if necessary (as per below).
+
 <figure markdown>
 ![CPDLC transfer behavior along a route](./img/cpdlc-xfr.png)
   <figcaption>CPDLC transfer behavior along a route</figcaption>
@@ -217,7 +219,7 @@ When issuing a weather deviation, include the approved deviation along with a re
 
 No CPDLC transfer is required when handing off an aircraft between sectors within the same FIR. The CPDLC connection remains active with the same ATSU.
 
-If open CPDLC dialogues exist at handoff, coordinate with the receiving sector:
+If open CPDLC dialogues exist at handoff, coordinate with the receiving sector.
 
 If the receiving sector cannot accept the aircraft with open dialogues, delay the handoff until all dialogues are closed, or close the dialogues before transfer.
 
