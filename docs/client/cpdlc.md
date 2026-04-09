@@ -208,17 +208,33 @@ When issuing a weather deviation, include the approved deviation along with a re
 
 ### Transfers
 
-#### Within the Same ATSU
+<figure markdown>
+![CPDLC transfer behavior along a route](./img/cpdlc-xfr.png)
+  <figcaption>CPDLC transfer behavior along a route</figcaption>
+</figure>
 
-Ensure all open CPDLC dialogues are closed before handing off an aircraft to the next sector. If a coordinated CPDLC transfer has been agreed with the receiving sector, send a `MONITOR` uplink specifying the next VHF frequency instead of closing the connection. This keeps the CPDLC link active while transferring voice communications.
+#### Within the Same FIR
 
-#### To a Different ATSU
+No CPDLC transfer is required when handing off an aircraft between sectors within the same FIR. The CPDLC connection remains active with the same ATSU.
 
-If open uplink messages exist when transferring to another ATSU, send `CHECK AND RESPOND TO OPEN CPDLC MESSAGES` and coordinate a delay with the next centre if needed. Send `END SERVICE` manually once all dialogues are closed. If a dialogue cannot be closed, advise the next unit and manually terminate the connection.
+If open CPDLC dialogues exist at handoff, coordinate with the receiving sector:
 
-If the transfer will not complete before the aircraft reaches the FIR boundary, advise the aircraft using `EXPECT CPDLC TRANSFER AT [time]`.
+If the receiving sector cannot accept the aircraft with open dialogues, delay the handoff until all dialogues are closed, or close the dialogues before transfer.
+
+#### To a Different FIR
+
+When handing off to a different FIR, the CPDLC Editor automatically opens pre-populated with `END SERVICE` and `CONTACT [unit] ON [freq]` messages. Once the dialogue is closed, the CPDLC connection terminates automatically.
+
+If open CPDLC dialogues exist before transferring to another FIR, send `CHECK AND RESPOND TO OPEN CPDLC MESSAGES` before initiating the transfer.
+Coordinate any delay in transferring the CPDLC connection with the receiving ATSU, and advise the pilot using `EXPECT CPDLC TRANSFER AT [time]`.
 
 For aircraft entering a non-CPDLC FIR, send `END SERVICE` within 10 minutes after the frequency transfer point.
+
+#### From a Different FIR
+
+If the previous FIR is CPDLC equipped and uses the CPDLC server software, the aircraft may have received a `NEXT DATA AUTHORITY` message and initiated logon before the boundary. Once the aircraft is within your jurisdiction, request a position report to promote the CPDLC status to Current Data Authority if not already.
+
+If receiving from a non-CPDLC FIR, initiate the connection and request a position report.
 
 If a connection request fails with `CONNECTION REQUEST FAILED. CURRENT DATA AUTHORITY [unit name]`, ask the previous unit to re-send the `NEXT DATA AUTHORITY` message, then manually send another `CONNECTION REQUEST`.
 If connection attempts continue to fail, instruct the pilot to disconnect CPDLC and continue on voice.
