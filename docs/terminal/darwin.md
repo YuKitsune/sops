@@ -134,6 +134,7 @@ Voiceless for all aircraft:
 - Assigned the lower of `F180` or the `RFL`
 
 !!! note
+    Aircraft are *not required* to be tracking via the **SID procedure**, simply tracking via any of the terminus waypoints (regardless of *departure airport* or *assigned SID*) is sufficient to meet the criteria for **voiceless coordination**.
 
 All other aircraft going to TRT CTA must be **Heads-up** coordinated by DN TCU prior to the boundary.
 
