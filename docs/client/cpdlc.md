@@ -217,15 +217,27 @@ When transferring an aircraft to the next sector, handoff the tag to the next co
 
 #### Within the Same FIR
 
-No CPDLC transfer is required when handing off an aircraft between sectors within the same FIR. The CPDLC connection remains active with the same ATSU.
+No CPDLC connection transfer is required when handing off an aircraft between sectors within the same FIR. The CPDLC connection remains active with the same ATSU.
+
+Controllers must still manually issue frequency transfer instructions to the aircraft via voice or CPDLC as appropriate.
 
 If open CPDLC dialogues exist at handoff, coordinate with the receiving sector.
 
 If the receiving sector cannot accept the aircraft with open dialogues, delay the handoff until all dialogues are closed, or close the dialogues before transfer.
 
-#### To a Different FIR
+#### To a Different FIR 
 
-When handing off to a different FIR, the CPDLC Editor automatically opens pre-populated with `END SERVICE` and `CONTACT [unit] ON [freq]` messages. Once the dialogue is closed, the CPDLC connection terminates automatically.
+When handing off to a different FIR, send the `END SERVICE` and frequency transfer instructions via the CPDLC editor:
+
+```
+END SERVICE.
+CONTACT AUCKLAND RADIO ON 8.867.
+```
+
+The CPDLC connection will remain active until the pilot responds (typically `WILCO`) and the dialogue closes. This ensures the pilot acknowledges the frequency instructions before losing CPDLC connectivity.
+
+!!! note
+    If `END SERVICE` is sent alone without additional message elements, the connection terminates immediately since no response is required.
 
 If open CPDLC dialogues exist before transferring to another FIR, send `CHECK AND RESPOND TO OPEN CPDLC MESSAGES` before initiating the transfer.
 Coordinate any delay in transferring the CPDLC connection with the receiving ATSU, and advise the pilot using `EXPECT CPDLC TRANSFER AT [time]`.
@@ -234,7 +246,7 @@ For aircraft entering a non-CPDLC FIR, send `END SERVICE` within 10 minutes afte
 
 #### From a Different FIR
 
-If the previous FIR is CPDLC equipped and uses the CPDLC server software, the aircraft may have received a `NEXT DATA AUTHORITY` message and initiated logon before the boundary. Once the aircraft is within your jurisdiction, request a position report to promote the CPDLC status to Current Data Authority if not already.
+If the previous FIR is CPDLC equipped and uses the CPDLC server software, the aircraft may have received a `NEXT DATA AUTHORITY` message and initiated logon before the FIR boundary. Once the aircraft is within your jurisdiction, request a position report to promote the CPDLC status to Current Data Authority if not already.
 
 If receiving from a non-CPDLC FIR, initiate the connection and request a position report.
 
