@@ -208,6 +208,9 @@ Ensure the `ETA_FF` is accurate at least 10 minutes prior to the feeder fix. If 
 Remove any PETOs (Pilot Estimated Time Over) that may affect the accuracy of the system estimates.
 
 !!! tip
+    The [Hold Plugin](./holdlist.md) will adjust the estimates based on the hold exit time.
+
+!!! tip
     If the ETA_FF is inaccurate, check the TAS in the flight plan is accurate.
 
 ### Re-routing
